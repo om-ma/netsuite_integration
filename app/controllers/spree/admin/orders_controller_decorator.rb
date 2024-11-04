@@ -13,7 +13,6 @@ module Spree
       end
 
       def create_netsuite_order
-        debugger
         NetsuiteAdminOrderWorker.perform_async(params[:id])
       end
     end
