@@ -3,3 +3,7 @@
 
 en:
   hello: "Hello world"
+  spree:
+    netsuite_sales_order_num: "NetSuite Sale Order Number"
+    netsuit_sales_order_number: "NetSuite Sale Order #: %{netsuit_number}"
+    create_netsuite_order: Create Netsuite Order
