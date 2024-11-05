@@ -14,7 +14,7 @@ module Spree
             item = Spree::NetsuiteItemService.format_item(item)
             items << item if item
           else
-            Spree::NetsuiteMailer.notify_netsuite(order: order,product_id: item.variant.product.id,product_name: item.variant.product.name).deliver_now
+            Spree::NetsuiteMailer.notify_netsuite(order: order).deliver_now
             return
           end
         end

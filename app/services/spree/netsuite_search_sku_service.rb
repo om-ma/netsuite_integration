@@ -28,7 +28,7 @@ module Spree
 
         if response.is_a?(Net::HTTPSuccess)
           response_data = JSON.parse(response.body)
-          response_data['items'].any? ? response_data['items'][0]['id'] : { error: 'No items found in the response' }
+          response_data['items'].any? ? response_data['items'][0]['id'] : {}
         else
           raise "HTTP Error: #{response.body}"
         end

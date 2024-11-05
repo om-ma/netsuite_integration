@@ -13,7 +13,9 @@ module Spree
       end
 
       def create_netsuite_order
-        NetsuiteAdminOrderWorker.perform_async(params[:id])
+        order = Spree::Order.find_by(number: params[:id])
+        NetsuiteAdminOrderWorker.perform_async(order.id)
+        redirect_to edit_admin_order_path(order)
       end
     end
   end
