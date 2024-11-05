@@ -18,8 +18,9 @@ module Spree
             return
           end
         end
-        items
+        order.route_insurance_selected == true ? items = add_route_insurance_item(items, order) : items
       end
+
       if items.present?
         begin
           Spree::NetsuiteOrderService.new.create_order(order, items)
@@ -27,6 +28,14 @@ module Spree
           Rails.logger.error("NetSuite order creation failed: #{e.message}")
         end
       end
+    end
+
+    private
+
+    def self.add_route_insurance_item(items, order)
+      item = { item: { id: 8 }, rate: order.route_insurance_price.to_f}
+      items << item
+      items
     end
   end
 end
