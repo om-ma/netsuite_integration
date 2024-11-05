@@ -41,7 +41,6 @@ module Spree
         authorization_header += ",#{key}=\"#{value}\""
       end
       authorization_header += ",oauth_signature=\"#{oauth_signature}\""
-
       authorization_header
     end
   end
