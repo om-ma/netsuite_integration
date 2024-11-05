@@ -26,7 +26,7 @@ module Spree
         response = http.request(request)
         if response.is_a?(Net::HTTPSuccess)
           response_data = JSON.parse(response.body)
-          netsuite_order_data = response_data['items'].any? ? response_data['items'][0] : { error: 'No items found in the response' }
+          netsuite_order_data = response_data['items'].any? ? response_data['items'][0] : {}
         else
           raise "HTTP Error: #{response.body}"
         end
