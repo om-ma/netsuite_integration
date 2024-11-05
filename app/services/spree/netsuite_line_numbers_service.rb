@@ -30,7 +30,6 @@ module Spree
           if line_numbers.present?
             Spree::NetsuiteCancelOrderService.new.cancel_order(order.netsuite_sales_order_id, line_numbers)
           end
-
         else
           raise "HTTP Error: #{response.body}"
         end
