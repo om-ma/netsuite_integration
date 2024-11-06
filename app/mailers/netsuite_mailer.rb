@@ -5,7 +5,7 @@ module Spree
     def notify_netsuite(order:)
       @order = order
 
-      mail(to: 'test@gmail.com', subject: "[Urgent: Netsuite Item ID] Order # #{@order.number}") # Added the missing closing parenthesis here
+      mail(to: 'test@gmail.com', subject: "[Urgent: Netsuite Item ID] Order # #{@order.number}")
     end
   end
 end

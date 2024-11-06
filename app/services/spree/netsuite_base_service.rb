@@ -58,7 +58,6 @@ module Spree
       authorization_header = "OAuth realm=\"#{@realm}\""
       oauth_params.each { |key, value| authorization_header += ",#{key}=\"#{value}\"" }
       authorization_header += ",oauth_signature=\"#{oauth_signature}\""
-
       authorization_header
     end
   end

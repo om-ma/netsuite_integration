@@ -2,11 +2,8 @@ module Spree
   module Admin
     OrdersController.class_eval do
 
-      before_action :load_order, only: %i[
-        create_netsuite_order
-      ]
       after_action :need_to_update_on_netsuite, only: %i[edit]
-
+      before_action :load_order, only: %i[ create_netsuite_order ]
       after_action :update_order_on_netsuite, only: :cancel
 
       def update_order_on_netsuite
