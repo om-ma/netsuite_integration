@@ -65,7 +65,7 @@ module Spree
       payment = order.payments.find do |p|
         p.payment_method.type == "Spree::PaymentMethod::Check"
       end
-      if payment.present? && !order.payment_state == "paid"
+      if payment.present?
         { status: 'A', payment_method_id: 2 }
       else
         { status: 'B', payment_method_id: 8 }
