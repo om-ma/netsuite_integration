@@ -22,10 +22,10 @@ module Spree
             return
           end
         end
-        items = add_route_insurance_item(items, order)
-        items = add_order_header_level_discount(items, order)
         items
       end
+      items = add_route_insurance_item(items, order)
+      items = add_order_header_level_discount(items, order)
       if items.present?
         begin
           Spree::NetsuiteOrderService.new.create_order(order, items)
@@ -39,13 +39,13 @@ module Spree
 
     def self.add_discount_item(item)
       if item.variant.sale_price.present?
-        discount_item = { item: { id: 7 }, rate: -item_rate(item.variant) , price: { id: -1 }, description: 'For: ' + item.name}
+        discount_item = { item: { id: 7 }, rate: -item_rate(item) , price: { id: -1 }, description: 'For: ' + item.name}
       end
     end
 
-    def self.item_rate(variant)
+    def self.item_rate(item)
       current_currency ||= Spree::Config[:currency]
-      variant.original_price_in(current_currency).amount.to_f - variant.sale_price.to_f
+      (item.variant.original_price_in(current_currency).amount.to_f - item.variant.sale_price.to_f) * item.quantity
     end
 
     def self.add_route_insurance_item(items, order)
