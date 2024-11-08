@@ -6,7 +6,7 @@ module Spree
     end
 
     def update
-      if @netsuite_setting.update(netsuite_settings_params.merge(active: netsuite_settings_params[:active] == '1'))
+      if @netsuite_setting.update(netsuite_settings_params)
         flash[:success] = "Setting updated"
         redirect_to edit_admin_netsuite_settings_path
       else
