@@ -7,3 +7,7 @@ en:
     netsuite_sales_order_num: "NetSuite Sale Order Number"
     netsuit_sales_order_number: "NetSuite Sale Order #: %{netsuit_number}"
     create_netsuite_order: Create Netsuite Order
+    netsuite_entity: Netsuite Entity
+    netsuite_location: Netsuite Location
+    netsuite_check_payment_method: Netsuite Check Payment Method
+    netsuite_online_payment_method: Netsuite Online Payment Method

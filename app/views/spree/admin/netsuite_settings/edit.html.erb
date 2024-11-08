@@ -1,0 +1,23 @@
+<%= form_for @netsuite_setting, url: admin_netsuite_settings_path, method: :put do |f| %>
+  <div class="form-group">
+    <%= f.label :netsuite_entity_id, Spree.t(:netsuite_entity) %>
+    <%= f.text_field :netsuite_entity_id, class: 'form-control' %>
+
+    <%= f.label :netsuite_location_id, Spree.t(:netsuite_location) %>
+    <%= f.text_field :netsuite_location_id, class: 'form-control' %>
+
+    <%= f.label :netsuite_check_payment_method_id, Spree.t(:netsuite_check_payment_method) %>
+    <%= f.text_field :netsuite_check_payment_method_id, class: 'form-control' %>
+
+    <%= f.label :netsuite_online_payment_method_id, Spree.t(:netsuite_online_payment_method) %>
+    <%= f.text_field :netsuite_online_payment_method_id, class: 'form-control' %>
+
+    <%= f.label :active, Spree.t(:active) %>
+    <%= f.check_box :active, {}, '1', '0' %>
+
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit Spree.t(:update), class: 'btn btn-primary' %>
+  </div>
+<% end %>
