@@ -19,7 +19,7 @@ Spree::Admin::PaymentsController.class_eval do
   end
 
   def update_payment_on_netsuite(payment,event)
-    if (event == "capture") && (@payment.payment_source.type == "Spree::PaymentMethod::Check")
+    if Spree::NetsuiteSetting.active? && (event == "capture") && (@payment.payment_source.type == "Spree::PaymentMethod::Check")
       payment.trigger_netsuite_update
     end
   end

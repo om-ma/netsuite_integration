@@ -8,7 +8,9 @@ module Spree
     BASE_URL = "#{NetsuiteBaseService::BASE_URL}record/v1/salesOrder"
 
     def total_line_item(order)
-      uri = URI.parse("#{BASE_URL}/#{order.netsuite_sales_order_id}/item")
+      uri = URI.parse("#{BASE_URL}/#{order.netsuite_sales_order_id}")
+      params = { expandSubResources: true }
+      uri.query = URI.encode_www_form(params)
       request = Net::HTTP::Get.new(uri)
       request['Content-Type'] = 'application/json'
       request['Authorization'] = generate_oauth_header(uri, 'GET')
@@ -21,9 +23,8 @@ module Spree
         if response.is_a?(Net::HTTPSuccess)
           response_data = JSON.parse(response.body)
           line_numbers = [] 
-           response_data['items'].map do |item|
-            href = item['links'][0]['href']
-            line_number = href.split('/').last
+           response_data["item"]['items'].map do |item|
+            line_number = item["line"]
             line_numbers << line_number
           end
           line_numbers
@@ -33,7 +34,6 @@ module Spree
         else
           raise "HTTP Error: #{response.body}"
         end
-        line_items_count
       rescue JSON::ParserError => e
         puts "JSON parsing error: #{e.message}"
         []
