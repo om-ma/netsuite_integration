@@ -157,9 +157,9 @@ module Spree
 
     def payment_method(order)
       if order.paid?
-        { status: 'B', payment_method_id: 8 }  # payment paid
+        { status: 'B', payment_method_id: @online_payment }  # payment paid
       else
-        { status: 'A', payment_method_id: 2 }  # payment pending
+        { status: 'A', payment_method_id: @check_payment }  # payment pending
       end
 
     end

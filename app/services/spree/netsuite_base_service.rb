@@ -13,6 +13,10 @@ module Spree
       @token_key = TOKEN_ID
       @token_secret = TOKEN_SECRET
       @realm = REALM
+      @entity_id = Spree::NetsuiteSetting.last.netsuite_entity_id
+      @location_id = Spree::NetsuiteSetting.last.netsuite_location_id
+      @check_payment = Spree::NetsuiteSetting.last.netsuite_check_payment_method_id
+      @online_payment = Spree::NetsuiteSetting.last.netsuite_online_payment_method_id
     end
 
     def generate_oauth_header(uri, method)

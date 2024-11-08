@@ -17,12 +17,12 @@ module Spree
       request['Authorization'] = generate_oauth_header(uri, 'POST')
 
       request.body = {
-        entity: { id: 483 },
+        entity: { id: @entity_id },
         custbody_nff_web_order_number: "#{Rails.env}-#{order.number}",
         item: {
           items: items
         },
-        location: { id: 2 },
+        location: { id: @location_id },
         orderstatus: payment[:status],
         shipmethod: { id: 66857 },
         shippingcost: order.shipment_total.to_f,
@@ -66,9 +66,9 @@ module Spree
         p.payment_method.type == "Spree::PaymentMethod::Check"
       end
       if payment.present?
-        { status: 'A', payment_method_id: 2 }
+        { status: 'A', payment_method_id: @check_payment }
       else
-        { status: 'B', payment_method_id: 8 }
+        { status: 'B', payment_method_id: @online_payment }
       end
     end
   end

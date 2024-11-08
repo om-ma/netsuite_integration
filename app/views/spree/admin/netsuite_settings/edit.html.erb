@@ -1,0 +1,35 @@
+<%= form_for @netsuite_setting, url: admin_netsuite_settings_path, method: :put do |f| %>
+<div id="contentHeaderRow" class="row align-items-center  border-bottom pl-2 pb-2 mb-3">
+  <h1 class="contextual-title px-0 mb-0 col">
+      Netsuite Settings
+  </h1>
+</div>
+  <div class="form-group">
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <%= f.label :netsuite_entity_id, Spree.t(:netsuite_entity) %>
+        <%= f.text_field :netsuite_entity_id, class: 'form-control' %>
+      </div>
+      <div class="col-md-6">
+        <%= f.label :netsuite_location_id, Spree.t(:netsuite_location) %>
+        <%= f.text_field :netsuite_location_id, class: 'form-control' %>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <%= f.label :netsuite_check_payment_method_id, Spree.t(:netsuite_check_payment_method) %>
+        <%= f.text_field :netsuite_check_payment_method_id, class: 'form-control' %>
+      </div>
+      <div class="col-md-6">
+        <%= f.label :netsuite_online_payment_method_id, Spree.t(:netsuite_online_payment_method) %>
+        <%= f.text_field :netsuite_online_payment_method_id, class: 'form-control' %>
+      </div>
+    </div>
+    <%= f.check_box :active, {}, '1', '0' %>
+    <%= f.label :active, Spree.t(:active) %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit Spree.t(:update), class: 'btn btn-primary' %>
+  </div>
+<% end %>
