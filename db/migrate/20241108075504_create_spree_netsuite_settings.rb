@@ -5,7 +5,7 @@ class CreateSpreeNetsuiteSettings < ActiveRecord::Migration[6.1]
       t.integer :netsuite_location_id
       t.integer :netsuite_check_payment_method_id
       t.integer :netsuite_online_payment_method_id
-      t.boolean :active
+      t.boolean :active, default: false
 
       t.timestamps
     end
