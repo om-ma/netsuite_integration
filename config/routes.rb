@@ -5,6 +5,7 @@ Spree::Core::Engine.add_routes do
       resources :orders, except: [:show] do
         post :create_netsuite_order, on: :member
       end
+      resource :netsuite_settings, only: [:edit, :update]
     end
   end
 end
