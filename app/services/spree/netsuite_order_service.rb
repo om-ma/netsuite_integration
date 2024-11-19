@@ -24,7 +24,7 @@ module Spree
         },
         location: { id: @location_id },
         orderstatus: payment[:status],
-        shipmethod: { id: 66857 },
+        shipmethod: { id: 66859 },
         shippingcost: order.shipment_total.to_f,
         shippingAddress: shipping_address(order.ship_address),
         paymentoption: {
