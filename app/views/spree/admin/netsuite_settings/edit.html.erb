@@ -25,8 +25,15 @@
         <%= f.text_field :netsuite_online_payment_method_id, class: 'form-control' %>
       </div>
     </div>
-    <%= f.check_box :active, {}, '1', '0' %>
-    <%= f.label :active, Spree.t(:active) %>
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <%= f.label :shipping_method_id, Spree.t(:shipping_method_id) %>
+        <%= f.text_field :shipping_method_id, class: 'form-control' %>
+      </div>
+      <div class="col-md-6" style="margin-top: 30px;">
+        <%= f.check_box :active, {}, '1', '0' %>
+        <%= f.label :active, Spree.t(:active) %>
+    </div>
   </div>
 
   <div class="form-actions">

@@ -11,11 +11,17 @@ module Spree
       end
 
       def need_to_update_on_netsuite
-        @order.update(is_updated_on_netsuite: false)
+        if defined?(ActiveRecord::Base.connected_to) && ActiveRecord::Base.respond_to?(:connected_to)
+          ActiveRecord::Base.connected_to(role: :writing) do
+            @order.update(is_updated_on_netsuite: false)
+          end
+        else
+          @order.update(is_updated_on_netsuite: false)
+        end
       end
 
       def create_netsuite_order
-        if Spree::NetsuiteSetting.active?
+        if defined?(Spree::NetsuiteSetting) && Spree::NetsuiteSetting.respond_to?(:active?) && Spree::NetsuiteSetting.active?
           order = Spree::Order.find_by(number: params[:id])
           NetsuiteAdminOrderWorker.perform_async(order.id)
           redirect_to edit_admin_order_path(order)
