@@ -11,9 +11,7 @@ module Spree
       end
 
       def need_to_update_on_netsuite
-        ActiveRecord::Base.connected_to(role: :writing) do
-          @order.update(is_updated_on_netsuite: false)
-        end
+        @order.update(is_updated_on_netsuite: false)
       end
 
       def create_netsuite_order
