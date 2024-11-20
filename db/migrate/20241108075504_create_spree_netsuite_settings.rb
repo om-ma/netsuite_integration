@@ -1,4 +1,4 @@
-class CreateSpreeNetsuiteSettings < ActiveRecord::Migration[6.1]
+class CreateSpreeNetsuiteSettings < ActiveRecord::Migration[5.2]
   def change
     create_table :spree_netsuite_settings do |t|
       t.integer :netsuite_entity_id
