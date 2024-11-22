@@ -25,6 +25,17 @@
         <%= f.text_field :netsuite_online_payment_method_id, class: 'form-control' %>
       </div>
     </div>
+    <div class="row mb-3">
+      <div class="col-md-12">
+        <%= f.text_area :exception_email_addresses, 
+                class: 'form-control', 
+                placeholder: 'Enter email addresses separated by commas', 
+                value: @netsuite_setting.exception_email_addresses.join(', ') rescue '' %>
+        <small class="form-text text-muted">
+          Use a comma-separated format for multiple email addresses.
+        </small>
+      </div>
+    </div>
     <%= f.check_box :active, {}, '1', '0' %>
     <%= f.label :active, Spree.t(:active) %>
   </div>

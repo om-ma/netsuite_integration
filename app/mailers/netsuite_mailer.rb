@@ -4,8 +4,19 @@ module Spree
 
     def notify_netsuite(order:)
       @order = order
-
-      mail(to: Rails.configuration.x.netsuite.exception_email_address, subject: "[Urgent: Netsuite Item ID] Order # #{@order.number}") # Added the missing closing parenthesis here
+      
+      # Fetch the first NetsuiteSetting record
+      current_netsuite_setting = Spree::NetsuiteSetting.first
+      
+      # Safely retrieve exception_email_addresses as an array
+      recipients = Array(current_netsuite_setting&.exception_email_addresses).reject(&:blank?)
+      
+      # Ensure there are recipients before sending the email
+      if recipients.any?
+        mail(to: recipients, subject: "[Urgent: Netsuite Item ID] Order ##{@order.number}")
+      else
+        Rails.logger.warn "No recipients configured for Netsuite notifications."
+      end
     end
   end
 end
