@@ -34,6 +34,8 @@ module Spree
         :netsuite_check_payment_method_id,
         :netsuite_online_payment_method_id,
         :active,
+        :inventory_location_id,
+        :inventory_subsidiary_id,
         exception_email_addresses: []
       )
     end

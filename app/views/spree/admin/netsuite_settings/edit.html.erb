@@ -26,7 +26,18 @@
       </div>
     </div>
     <div class="row mb-3">
+      <div class="col-md-6">
+        <%= f.label :inventory_location_id, Spree.t(:inventory_location_id) %>
+        <%= f.text_field :inventory_location_id, class: 'form-control' %>
+      </div>
+      <div class="col-md-6">
+        <%= f.label :inventory_subsidiary_id, Spree.t(:inventory_subsidiary_id) %>
+        <%= f.text_field :inventory_subsidiary_id, class: 'form-control' %>
+      </div>
+    </div>
+    <div class="row mb-3">
       <div class="col-md-12">
+        <%= f.label :exception_email_addresses, Spree.t(:exception_email_addresses) %>
         <%= f.text_area :exception_email_addresses, 
                 class: 'form-control', 
                 placeholder: 'Enter email addresses separated by commas', 

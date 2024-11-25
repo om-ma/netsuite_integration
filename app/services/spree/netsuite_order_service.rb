@@ -22,6 +22,7 @@ module Spree
         item: {
           items: items
         },
+        iscrosssubtransaction: true,
         location: { id: @location_id },
         orderstatus: payment[:status],
         shipmethod: { id: 66857 },
@@ -37,6 +38,7 @@ module Spree
       http.verify_mode = OpenSSL::SSL::VERIFY_NONE
       
       response = http.request(request)
+
       if response.code == '204'
         netsuite_order_data = Spree::GetNetsuiteSalesOrderService.new.get_order(order.number)
         if netsuite_order_data.present?
