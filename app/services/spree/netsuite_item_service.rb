@@ -10,7 +10,7 @@ module Spree
     private
 
     def self.rate_item(item)
-      if item.variant.sale_price.present?
+      if item.variant.respond_to?(:sale_price).present? && item.variant.sale_price.present?
         current_currency ||= Spree::Config[:currency]
         item.variant.original_price_in(current_currency).amount.to_f
       else

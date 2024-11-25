@@ -33,6 +33,7 @@ module Spree
         :netsuite_location_id,
         :netsuite_check_payment_method_id,
         :netsuite_online_payment_method_id,
+        :shipping_method_id,
         :active,
         :inventory_location_id,
         :inventory_subsidiary_id,

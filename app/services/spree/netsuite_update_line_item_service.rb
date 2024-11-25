@@ -54,7 +54,7 @@ module Spree
           items: items
         },
         orderstatus: payment[:status],
-        shipmethod: { id: 66857 },
+        shipmethod: { id: @shipping_method_id },
         shippingcost: order.shipment_total.to_f,
         shippingAddress: shipping_address(order.ship_address),
         paymentoption: {
@@ -79,7 +79,7 @@ module Spree
     private
 
     def update_add_discount_item(item)
-      if item.variant.sale_price.present?
+      if item.variant.respond_to?(:sale_price) && item.variant.sale_price.present?
         discount_item = { item: { id: 7 }, rate: -item_rate(item) , price: { id: -1 }, description: 'For: ' + item.name}
       end
     end
@@ -90,7 +90,7 @@ module Spree
     end
 
     def add_route_insurance_item(items, order)
-      if order.route_insurance_selected == true
+      if order.respond_to?(:route_insurance_selected) && order.route_insurance_selected == true
         item = { item: { id: 8 }, rate: order.route_insurance_price.to_f}
         items << item
         items
