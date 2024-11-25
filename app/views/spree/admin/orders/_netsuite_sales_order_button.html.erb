@@ -1,4 +1,4 @@
-<% if order.complete? && order.netsuite_sales_order_id.blank? %>
+<% if @order.complete? && @order.netsuite_sales_order_id.blank? %>
   <%= button_link_to Spree.t(:create_netsuite_order),
     create_netsuite_order_admin_order_path(@order),
     method: :post,

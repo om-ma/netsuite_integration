@@ -21,9 +21,12 @@ module Spree
       end
 
       def create_netsuite_order
-        if Spree::NetsuiteSetting.respond_to?(:active?) && Spree::NetsuiteSetting.active?
-          order = Spree::Order.find_by(number: params[:id])
+        order = Spree::Order.find_by(number: params[:id])
+        if !order.netsuite_sales_order_num.present? && Spree::NetsuiteSetting.respond_to?(:active?) && Spree::NetsuiteSetting.active?
           NetsuiteAdminOrderWorker.perform_async(order.id)
+          redirect_to edit_admin_order_path(order)
+        else
+          flash[:error] = Spree.t(:cannot_perform_operation)
           redirect_to edit_admin_order_path(order)
         end
       end

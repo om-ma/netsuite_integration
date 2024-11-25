@@ -6,10 +6,12 @@ module Spree
   class NetsuiteUpdateLineItemService < NetsuiteBaseService
     BASE_URL = "#{NetsuiteBaseService::BASE_URL}record/v1/salesOrder"
 
-    def update(order)
+    def update(order_id, line_item_ids)
+      order = Spree::Order.find order_id
+      line_items = Spree::LineItem.where(id: line_item_ids )
       items = []
       
-      order.line_items.each do |item|
+      line_items.each do |item|
         if item.variant.netsuite_item_id.present?
           discount_item = update_add_discount_item(item)
           item = Spree::NetsuiteItemService.format_item(item)
@@ -45,7 +47,7 @@ module Spree
       request = Net::HTTP::Patch.new(uri)
       request['Content-Type'] = 'application/json'
       request['Authorization'] = generate_oauth_header(uri, 'PATCH')
-
+      
       request.body = {
         shippingCost: order.shipment_total.to_f,
         item: {
@@ -119,28 +121,6 @@ module Spree
 
     def gift_card_amount(order)
       order.display_total_applied_gift_card.money.to_f
-    end
-
-    def verify_line_items(order)
-      items = []
-      order.line_items.each do |item|
-        if item.variant.netsuite_item_id.present?
-          item = Spree::NetsuiteItemService.format_item(item)
-          items << item if item
-        else
-          sku = item.variant.sku if item.variant.present?
-          item_id = Spree::NetsuiteSearchSkuService.new.search_by_sku(sku) if sku.present?
-          if item_id.present?
-            item.variant.update(netsuite_item_id: item_id)
-            item = Spree::NetsuiteItemService.format_item(item)
-            items << item if item
-          else
-            Spree::NetsuiteMailer.notify_netsuite(order: order).deliver_now
-            return
-          end
-        end
-        items
-      end
     end
 
     def shipping_address(address)

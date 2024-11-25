@@ -30,10 +30,31 @@
         <%= f.label :shipping_method_id, Spree.t(:shipping_method_id) %>
         <%= f.text_field :shipping_method_id, class: 'form-control' %>
       </div>
-      <div class="col-md-6" style="margin-top: 30px;">
-        <%= f.check_box :active, {}, '1', '0' %>
-        <%= f.label :active, Spree.t(:active) %>
     </div>
+    <div class="row mb-3">
+      <div class="col-md-6">
+        <%= f.label :inventory_location_id, Spree.t(:inventory_location_id) %>
+        <%= f.text_field :inventory_location_id, class: 'form-control' %>
+      </div>
+      <div class="col-md-6">
+        <%= f.label :inventory_subsidiary_id, Spree.t(:inventory_subsidiary_id) %>
+        <%= f.text_field :inventory_subsidiary_id, class: 'form-control' %>
+      </div>
+    </div>
+    <div class="row mb-3">
+      <div class="col-md-12">
+        <%= f.label :exception_email_addresses, Spree.t(:exception_email_addresses) %>
+        <%= f.text_area :exception_email_addresses, 
+                class: 'form-control', 
+                placeholder: 'Enter email addresses separated by commas', 
+                value: @netsuite_setting.exception_email_addresses.join(', ') rescue '' %>
+        <small class="form-text text-muted">
+          Use a comma-separated format for multiple email addresses.
+        </small>
+      </div>
+    </div>
+    <%= f.check_box :active, {}, '1', '0' %>
+    <%= f.label :active, Spree.t(:active) %>
   </div>
 
   <div class="form-actions">

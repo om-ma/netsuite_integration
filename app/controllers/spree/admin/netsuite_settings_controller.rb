@@ -6,6 +6,11 @@ module Spree
     end
 
     def update
+      if params[:netsuite_setting][:exception_email_addresses].present?
+        params[:netsuite_setting][:exception_email_addresses] = 
+          params[:netsuite_setting][:exception_email_addresses].split(',').map(&:strip)
+      end
+
       if @netsuite_setting.update(netsuite_settings_params)
         flash[:success] = "Setting updated"
         redirect_to edit_admin_netsuite_settings_path
@@ -29,7 +34,10 @@ module Spree
         :netsuite_check_payment_method_id,
         :netsuite_online_payment_method_id,
         :shipping_method_id,
-        :active
+        :active,
+        :inventory_location_id,
+        :inventory_subsidiary_id,
+        exception_email_addresses: []
       )
     end
   end

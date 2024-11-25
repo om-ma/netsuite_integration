@@ -1,7 +1,10 @@
 module Spree
   class NetsuiteItemService
+
     def self.format_item(item)
-      { item: { id: item.variant.netsuite_item_id }, rate: rate_item(item), quantity: item.quantity }
+      { item: { id: item.variant.netsuite_item_id }, rate: rate_item(item), quantity: item.quantity,
+        custcol_nff_line_item_shipping_weight: item.variant&.weight&.to_f, inventorylocation: { id:  Spree::NetsuiteSetting.first.inventory_location_id },
+        inventorysubsidiary: { id:  Spree::NetsuiteSetting.first.inventory_subsidiary_id } }
     end
 
     private
