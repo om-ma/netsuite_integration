@@ -18,6 +18,7 @@ module Spree
       @location_id = current_netsuite_setting.netsuite_location_id
       @check_payment = current_netsuite_setting.netsuite_check_payment_method_id
       @online_payment = current_netsuite_setting.netsuite_online_payment_method_id
+      @shipping_method_id  = current_netsuite_setting.shipping_method_id
     end
 
     def generate_oauth_header(uri, method)

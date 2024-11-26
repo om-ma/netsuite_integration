@@ -8,15 +8,16 @@ module Spree
   class GetNetsuiteSalesOrderService < NetsuiteBaseService
     BASE_URL = "#{NetsuiteBaseService::BASE_URL}query/v1/suiteql"
 
-    def get_order(order_id)
+    def get_order(order_number)
       uri = URI.parse(BASE_URL)
+      current_store = Spree::Store.default
       request = Net::HTTP::Post.new(uri)
       request['Content-Type'] = 'application/json'
       request['Prefer'] = 'transient'
       request['Authorization'] = generate_oauth_header(uri, 'POST')
 
       request.body ={
-        "q": "SELECT id, tranid, custbody_nff_web_order_number FROM transaction WHERE custbody_nff_web_order_number = '#{Rails.env}-#{order_id}'"
+        "q": "SELECT id, tranid, custbody_nff_web_order_number FROM transaction WHERE custbody_nff_web_order_number = '#{Rails.env}-#{current_store.code}-#{order_number}'"
       }.to_json
 
       http = Net::HTTP.new(uri.host, uri.port)

@@ -9,6 +9,7 @@ module Spree
     BASE_URL = "#{NetsuiteBaseService::BASE_URL}record/v1/salesOrder"
 
     def create_order(order, items)
+      current_store = Spree::Store.default
       payment = payment_method(order)
       return if payment.nil?
       uri = URI.parse(BASE_URL)
@@ -18,7 +19,7 @@ module Spree
 
       request.body = {
         entity: { id: @entity_id },
-        custbody_nff_web_order_number: "#{Rails.env}-#{order.number}",
+        custbody_nff_web_order_number: "#{Rails.env}-#{current_store.code}-#{order.number}",
         item: {
           items: items
         },
