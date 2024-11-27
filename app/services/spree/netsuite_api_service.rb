@@ -5,7 +5,7 @@ module Spree
       order.line_items.each do |item|
         if item.variant.netsuite_item_id.present?
           discount_item = add_discount_item(item)
-          item = Spree::NetsuiteItemService.format_item(item)
+          item = Spree::NetsuiteItemService.format_item(item.id)
           items << item if item
           items << discount_item if discount_item
         else
@@ -14,7 +14,7 @@ module Spree
           if item_id.present?
             item.variant.update(netsuite_item_id: item_id)
             discount_item = add_discount_item(item)
-            item = Spree::NetsuiteItemService.format_item(item)
+            item = Spree::NetsuiteItemService.format_item(item.id)
             items << item if item
             items << discount_item if discount_item
           else
