@@ -2,7 +2,7 @@ Deface::Override.new(
   virtual_path: "spree/admin/orders/index",
   name: "netsuite_sales_order_num_header",
   insert_after: "[data-hook='admin_orders_index_headers'] th:nth-child(2)",
-  text: "<th><%= sort_link @search, :netsuite_sales_order_num, 'NetSuite Sales Order Number' %></th>"
+  text: "<th><%= sort_link @search, :netsuite_sales_order_num, 'NetSuite Order Number' %></th>"
 )
 
 Deface::Override.new(
