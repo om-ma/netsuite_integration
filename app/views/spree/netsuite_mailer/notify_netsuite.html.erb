@@ -1,0 +1,14 @@
+<h2>Missing NetSuite Item ID Alert</h2>
+<p>An item was not found in NetSuite for the following details:</p>
+
+<ul>
+  <li><strong>Order Number:</strong> <%= @order.number %></li>
+  <% @order.line_items.each do |item| %>
+    <% if item.present? && item.variant.present?%>
+      <li><strong>Product ID:</strong> <%= item.variant.product.id %></li>
+      <li><strong>Product Name:</strong> <%= item.variant.product.name %></li>
+      <li><strong>Variant SKU:</strong> <%= item.variant.sku %></li>
+      <br>
+    <% end %>
+  <% end %>
+</ul>

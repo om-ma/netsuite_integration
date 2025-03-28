@@ -1,0 +1,6 @@
+<% if @order.netsuite_sales_order_num.present? %>
+  <tr>
+    <td><strong><%= Spree.t(:netsuite_sales_order_num) %></strong></td>
+    <td><%= @order.netsuite_sales_order_num %></td>
+  </tr>
+<% end %>
